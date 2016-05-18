@@ -1,9 +1,11 @@
 # PracticeProjects
 A folder of projects undertaken to improve programming skills and start small projects.
 
-# List - some incomplete
+## List - some incomplete
 
-# Programming exercises
+#### Programming exercises
+
+###### General
 
 Find PI to the Nth Digit – Enter a number and have the program generate PI up to that many decimal places. Keep a limit to how far the program will go.
 
@@ -31,7 +33,7 @@ Done.
 
 Calculator – A simple calculator to do basic operators. Make it a scientific calculator for added complexity.
 
-
+Done.
 
 Unit Converter (temp, currency, volume, mass and more) – Converts various units between one another. The user enters the type of unit being entered, the type of unit they want to convert to and then the value. The program will then make the conversion.
 
@@ -46,7 +48,7 @@ Tax Calculator – Asks the user to enter a cost and either a country or state t
 Dijkstra’s Algorithm – Create a program that finds the shortest path through a graph using its edges.
 
 
-Text
+###### Text
 
 Reverse a String – Enter a string and the program will reverse it and print it out.
 
@@ -83,7 +85,7 @@ CD Key Generator – Generates a unique key for your applications to use based o
 Regex Query Tool – A tool that allows the user to enter a text string and then in a separate control enter a regex pattern. It will then run the regular expression against the source text and return any matches or flag errors in the regular expression.
 
 
-Networking
+###### Networking
 
 FTP Program – A file transfer program which can transfer files back and forth from a remote web sever.
 
@@ -116,7 +118,7 @@ Small Web Server – A simple web server that can serve HTML files that contain 
 Web Bot – An automated program which carries out tasks on the web including checking websites, page scraping, and summarization of data or web posting.
 
 
-Classes
+###### Classes
 
 Product Inventory Project – Create an application which manages an inventory of products. Create a product class which has a price, id, and quantity on hand. Then create an inventory class which keeps track of various products and can sum up the inventory value.
 
@@ -153,7 +155,7 @@ Josephus Problem – Create a program which links together various node objects 
 Family Tree Creator – Create a class called “Person” which will have a name, when they were born and when (and if) they died. Allow the user to create these Person classes and put them into a family tree structure. Print out the tree to the screen.
 
 
-Threading
+###### Threading
 
 Create Progress Bar of Download – Create a progress bar for applications that can keep track of a download in progress. The progress bar will be on a separate thread and will communicate with the main thread using delegates.
 
@@ -164,7 +166,7 @@ Chat Application (remoting style) – Create a chat application which allows you
 Bulk Thumbnail Creator – Picture processing can take a bit of time for some transformations. Especially if the image is large. Create an image program which can take hundreds of images and convert them to a specified size in the background thread while you do other things. For added complexity, have one thread handling resizing, have another bulk renaming of thumbnails etc.
 
 
-Web
+###### Web
 
 WYSIWG (What you see is what you get) Editor – Create an editor online which allows people to move around elements, create tables, write text, set colors etc for web pages without having to know HTML. Think Dreamweaver or FrontPage but for online sites. If you need an example check out the DIC page used to create a post.
 
@@ -199,7 +201,7 @@ Template Maker – Make a site or application which allows the user to enter in 
 CAPTCHA Maker – Ever see those images with letters a numbers when you signup for a service and then asks you to enter what you see? It keeps web bots from automatically signing up and spamming. Try creating one yourself for online forms. If you use PHP, take a look at the image functions of GD.
 
 
-Files
+###### Files
 
 Quiz Maker – Make an application which takes various questions form a file, picked randomly, and puts together a quiz for students. Each quiz can be different and then reads a key to grade the quizzes.
 
@@ -234,7 +236,7 @@ Code Snippet Manager – Another utility program that allows coders to put in fu
 Versioning Manager – Create your own versioning system for code files. Users are forced to check out items and lock items during reading and writing so that a group of programmers are not accidentally overwriting code files on one another.
 
 
-Databases
+###### Databases
 
 SQL Query Analyzer – A utility application which a user can enter a query and have it run against a local database and look for ways to make it more efficient.
 
@@ -263,7 +265,7 @@ Database Translation (MySQL <-> SQL Server) – A simple utility that reads in f
 Web Board (Forum) – Create a forum for you and your buddies to post, administer and share thoughts and ideas.
 
 
-Graphics and Multimedia
+###### Graphics and Multimedia
 
 Slide Show – Make an application that shows various pictures in a slide show format. For extra complexity try adding various effects like fade in/out, star wipe and window blinds transitions.
 
@@ -301,7 +303,7 @@ Watermarking Application – Have some pictures you want copyright protected? Ad
 Turtle Graphics – This is a common project where you create a floor of 20 x 20 squares and using various commands you tell a turtle to draw a line on the floor. You have move forward, left or right, lift or drop pen etc. For added complexity, allow the program to read in the list of commands from a file. Do a search online for “Turtle Graphics” for more information.
 
 
-Games
+###### Games
 
 Chess and Checkers – Simply put a game of chess or checkers. Try to make it playable online and if you can use a graphical user interface that can also undo or redo a step as well as keep a history of moves for replay.
 
