@@ -9,8 +9,7 @@ class Build( context: Context ) extends BasicBuild( context ){
     ++
     Resolver( mavenCentral ).bind(
       ScalaDependency( "org.scalafx", "scalafx", "8.0.60-R9" ),
-      ScalaDependency( "org.scalafx", "scalafxml-core-sfx8", "0.2.2"),
-      ScalaDependency( "org.scala-lang.modules", "scala-parser-combinators", "1.0.4")
+      ScalaDependency( "org.scalafx", "scalafxml-core-sfx8", "0.2.2")
     )
   )
 }

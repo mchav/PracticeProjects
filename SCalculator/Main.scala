@@ -4,27 +4,93 @@ import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.Scene
+import scalafx.event._
 import scalafxml.core.{NoDependencyResolver, FXMLView}
 import scalafx.event.ActionEvent
-import scalafx.scene.control.{Button, TextField}
-import scalafx.scene.layout.GridPane
+import scalafx.event.EventHandler
+import scalafx.scene.control._
+import scalafx.scene.text._
+import scalafx.scene.input.MouseEvent
+import scalafx.geometry._
+import scalafx.scene.layout._
 import scalafxml.core.macros.sfxml
 
-object UI extends JFXApp {
-  val resource = getClass.getResource("scalculator.fxml")
-  if (resource == null) {
-    throw new IOException("Cannot load resource: scalculator.fxml")
+object Main extends JFXApp {
+  val txtMain = new TextField() {
+    text = ""
+    prefHeight = 134
+    prefWidth = 600
+    hgrow = Priority.Always
+    vgrow = Priority.Never
+  }
+  def handleKeyPress(symb: String): Unit = symb match {
+    case "=" => txtMain.setText(Calculator.eval(txtMain.getText()).toString)
+    case "C" => txtMain.setText("")
+    case "D" => txtMain.setText(txtMain.getText().dropRight(1))
+    case c if Calculator.operators contains c  => {
+      val currentText = txtMain.getText()
+      txtMain.setText(currentText + " " + symb + " ")
+    }
+    case _ => {
+      val currentText = txtMain.getText()
+      txtMain.setText(currentText + symb )
+    }
   }
 
-  val root = FXMLView(resource, NoDependencyResolver)
+  def createButton(symb: String): Button = {
+    val btn = new Button() {
+      text = symb
+      prefHeight = 56 
+      prefWidth = 150
+      filterEvent(MouseEvent.Any) {
+          (me: MouseEvent) =>
+            me.eventType match {
+                case MouseEvent.MousePressed => handleKeyPress(symb)
+                case _ => print("")
+            }
+      }
+    }
+    btn
+  }
 
+  val buttonSymbols: Seq[String] = "789/456*123+.0^-√CD=".map(_.toString).toSeq
+
+  val buttons : Seq[Button] = buttonSymbols.map(symb => createButton(symb))
+  
+  val panelBox = new HBox() {
+    layoutX = -3
+    prefHeight = 100
+    prefWidth = 600
+    children = Seq(txtMain)
+  }
+
+  val btnGrid = new FlowPane() {
+    layoutX = 1
+    prefHeight = 344
+    prefWidth = 600
+    children = buttons
+  }
+
+  val keyBox = new HBox() {
+    layoutX = -3
+    prefHeight = 278
+    prefWidth = 600
+    children = Seq(btnGrid)
+  }
+
+  val pane = new FlowPane() {
+    layoutY = 35
+    prefHeight = 100
+    prefWidth = 200
+    children = Seq(panelBox, keyBox)
+  }
   stage = new PrimaryStage() {
-    title = "Scalculator"
-    scene = new Scene(root)
+    title = "SCalculator"
+    scene = new Scene(pane)
   }
 }
 
-object Main extends App {
+object Calculator {
   val operators = "+-*/^√"
   sealed trait Token { override def toString: String }
   case object TokEnd extends Token {
@@ -36,7 +102,7 @@ object Main extends App {
   case class TokIdent(ident: String) extends Token {
     override def toString() = ident
   }
-  case class TokNum(num: Int) extends Token {
+  case class TokNum(num: Double) extends Token {
     override def toString() = num.toString
   }
   case object TokSpace extends Token {
@@ -94,23 +160,23 @@ object Main extends App {
 
     def number(c: Char, s: String) = {
       def digits(str: String): (String, String) = {
-        (str.takeWhile(_.isDigit), str.dropWhile(_.isDigit))
+        (str.takeWhile(x => x.isDigit || x == '.'), str.dropWhile(x => x.isDigit || x == '.'))
       }
       val (str, cs) = digits(s)
-      TokNum((c +: str).toInt) +: tokenise(cs)
+      TokNum((c +: str).toDouble) +: tokenise(cs)
     }
 
     s match {
       case "" => Seq()
       case _  => s.head match {
-        case '='                       => TokAssign +: tokenise(s.tail)
-        case '('                       => TokLParen +: tokenise(s.tail)
-        case ')'                       => TokRParen +: tokenise(s.tail)
-        case c if operators contains c => TokOp(operator(c)) +: tokenise(s.tail)
-        case c if c.isDigit            => number(c, s.tail)
-        case c if c.isLetter           => identifier(c, s.tail)
-        case c if c.isWhitespace       => TokSpace +: tokenise(s.tail)
-        case c                         => throw new IllegalArgumentException("Cannot tokenise " + c)
+        case '='                          => TokAssign +: tokenise(s.tail)
+        case '('                          => TokLParen +: tokenise(s.tail)
+        case ')'                          => TokRParen +: tokenise(s.tail)
+        case c if operators contains c    => TokOp(operator(c)) +: tokenise(s.tail)
+        case c if (c.isDigit || c == '.') => number(c, s.tail)
+        case c if c.isLetter              => identifier(c, s.tail)
+        case c if c.isWhitespace          => TokSpace +: tokenise(s.tail)
+        case c                            => throw new IllegalArgumentException("Cannot tokenise " + c)
       }
     }
   }
@@ -224,5 +290,12 @@ object Main extends App {
       case _          => throw new IllegalArgumentException("Not yet implemented")
     }
   }
-  println(evaluate(parse(deSpace(tokenise("√4")))))
+
+  def eval(exp: String): Double = {
+    val tokenised = deSpace(tokenise(exp)) 
+    println(tokenised)
+    val parsed = parse(tokenised)
+    println(parsed)
+    evaluate(parsed)
+  }
 }
