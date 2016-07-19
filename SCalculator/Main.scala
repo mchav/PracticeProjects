@@ -87,6 +87,7 @@ object Main extends JFXApp {
   stage = new PrimaryStage() {
     title = "SCalculator"
     scene = new Scene(pane)
+    resizable = false
   }
 }
 

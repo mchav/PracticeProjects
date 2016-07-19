@@ -47,8 +47,11 @@ Tax Calculator – Asks the user to enter a cost and either a country or state t
 
 Dijkstra’s Algorithm – Create a program that finds the shortest path through a graph using its edges.
 
+Done.
 
 ###### Text
+
+RhymeScheme - rhyme highlighter
 
 Reverse a String – Enter a string and the program will reverse it and print it out.
 

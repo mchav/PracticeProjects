@@ -1,7 +1,7 @@
 import annotation.tailrec
 object Main {
   def main( args: Array[String] ): Unit = {
-    println( toDecimal("1111111") )
+    println( toDecimal(args(1)) )
   }
 
   def toDecimal(bin: String): Int = {
